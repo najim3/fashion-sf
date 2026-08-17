@@ -22,13 +22,6 @@ export function Header() {
 
   useEffect(() => {
     setIsMounted(true);
-
-    const handleOpenCart = () => setIsCartOpen(true);
-    window.addEventListener("open-cart", handleOpenCart);
-
-    return () => {
-      window.removeEventListener("open-cart", handleOpenCart);
-    };
   }, []);
 
   return (

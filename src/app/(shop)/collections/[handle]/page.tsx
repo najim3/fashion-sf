@@ -67,7 +67,7 @@ export default async function CollectionPage({
   
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: "Home", url: "/" },
-    { name: "Collections", url: "/collections" },
+    { name: "Categories", url: "/collections" },
     { name: collection.title, url: `/collections/${collection.handle}` },
   ]);
 

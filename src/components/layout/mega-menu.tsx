@@ -15,7 +15,7 @@ export function MegaMenu() {
   const [activeItem, setActiveItem] = useState<string | null>(null);
 
   return (
-    <nav className="h-full flex items-center" onMouseLeave={() => setActiveItem(null)}>
+    <nav className="relative h-full flex items-center" onMouseLeave={() => setActiveItem(null)}>
       <ul className="flex items-center gap-6">
         {MENU_ITEMS.map((item) => (
           <li key={item.name} className="h-full">

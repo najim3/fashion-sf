@@ -19,7 +19,7 @@ export function AnnouncementBar() {
           exit={{ height: 0, opacity: 0 }}
           className="bg-brand text-brand-foreground overflow-hidden relative"
         >
-          <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm font-medium">
+          <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm font-medium relative">
             <p>{text}</p>
             <button 
               onClick={() => setIsVisible(false)}

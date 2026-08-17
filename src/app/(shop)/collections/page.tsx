@@ -4,8 +4,8 @@ import Image from "next/image";
 import { getCollections } from "@/lib/shopify/queries/collections";
 
 export const metadata: Metadata = {
-  title: "Collections | Fashion SF",
-  description: "Browse all our curated collections.",
+  title: "Categories | Fashion SF",
+  description: "Browse all our curated product categories.",
 };
 
 export default async function CollectionsPage() {
@@ -14,7 +14,7 @@ export default async function CollectionsPage() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
       <h1 className="text-3xl md:text-4xl font-display font-bold mb-8 text-center">
-        All Collections
+        All Categories
       </h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
