@@ -90,7 +90,7 @@ export function ProductFilters() {
       {/* Mobile Filter Toggle */}
       <button 
         onClick={() => setIsOpen(true)}
-        className="md:hidden flex items-center gap-2 py-2 px-4 border border-gray-200 bg-white hover:bg-gray-50 text-sm font-medium rounded-md transition-colors"
+        className="md:hidden flex items-center gap-2 py-2 px-4 border border-border bg-background hover:bg-muted text-sm font-medium rounded-md transition-colors"
       >
         <Filter className="w-4 h-4" />
         <span>Filters {activeFilterCount > 0 && `(${activeFilterCount})`}</span>
@@ -99,21 +99,21 @@ export function ProductFilters() {
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="fixed inset-0 bg-brand/50 z-40 md:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Filter Sidebar */}
       <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-full max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:shadow-none md:w-64 md:flex-shrink-0 md:block",
+        "fixed inset-y-0 left-0 z-50 w-full max-w-xs bg-background shadow-xl transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:shadow-none md:w-64 md:flex-shrink-0 md:block",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="h-full flex flex-col">
           {/* Header (Mobile) */}
           <div className="flex items-center justify-between p-4 border-b md:hidden">
             <h2 className="text-lg font-medium">Filters</h2>
-            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-gray-100 rounded-full">
+            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-muted rounded-full">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -124,7 +124,7 @@ export function ProductFilters() {
               {activeFilterCount > 0 && (
                 <button 
                   onClick={clearAllFilters}
-                  className="text-sm text-gray-500 hover:text-black hover:underline"
+                  className="text-sm text-muted-foreground hover:text-foreground hover:underline"
                 >
                   Clear all
                 </button>
@@ -136,7 +136,7 @@ export function ProductFilters() {
                 <div key={category.id} className="border-b pb-4">
                   <button
                     onClick={() => toggleSection(category.id)}
-                    className="flex w-full items-center justify-between py-2 text-sm font-medium text-gray-900"
+                    className="flex w-full items-center justify-between py-2 text-sm font-medium text-foreground"
                   >
                     {category.name}
                     <ChevronDown className={cn(
@@ -158,11 +158,11 @@ export function ProductFilters() {
                               type="checkbox"
                               checked={isChecked}
                               onChange={() => handleFilterChange(category.id, option.value)}
-                              className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black accent-black"
+                              className="h-4 w-4 rounded border-border text-foreground focus:ring-black accent-black"
                             />
                             <label
                               htmlFor={`filter-${category.id}-${option.value}`}
-                              className="ml-3 text-sm text-gray-600 cursor-pointer flex-1"
+                              className="ml-3 text-sm text-muted-foreground cursor-pointer flex-1"
                             >
                               {option.label}
                             </label>
@@ -180,7 +180,7 @@ export function ProductFilters() {
           <div className="p-4 border-t md:hidden">
             <button 
               onClick={() => setIsOpen(false)}
-              className="w-full bg-black text-white py-3 rounded-md font-medium"
+              className="w-full bg-brand text-brand-foreground py-3 rounded-md font-medium"
             >
               Show Results
             </button>

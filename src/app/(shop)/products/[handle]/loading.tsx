@@ -13,7 +13,7 @@ export default function ProductLoading() {
         <div className="md:w-1/2 lg:w-2/5 flex flex-col gap-6">
           <TextBlockSkeleton />
           
-          <div className="space-y-4 py-6 border-y border-gray-100">
+          <div className="space-y-4 py-6 border-y border-border">
             <div className="h-4 w-1/4 bg-gray-200 animate-pulse rounded" />
             <div className="flex gap-2">
               {[1, 2, 3].map((i) => (

@@ -30,7 +30,7 @@ export function BrandStory() {
           
           <Link 
             href="/about" 
-            className="inline-block border border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-full font-medium transition-colors"
+            className="inline-block border border-white text-white hover:bg-background hover:text-foreground px-8 py-3 rounded-full font-medium transition-colors"
           >
             Read Our Full Story
           </Link>

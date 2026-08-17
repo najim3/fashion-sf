@@ -64,7 +64,7 @@ export function Testimonials() {
   }, [emblaApi]);
 
   return (
-    <section className="py-24 bg-gray-50 border-t border-gray-100 overflow-hidden">
+    <section className="py-24 bg-muted border-t border-border overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-display font-bold mb-4">What Our Customers Say</h2>
@@ -76,7 +76,7 @@ export function Testimonials() {
             </div>
             <span className="font-semibold text-lg">4.9/5</span>
           </div>
-          <p className="text-gray-600">Based on over 1,000+ reviews</p>
+          <p className="text-muted-foreground">Based on over 1,000+ reviews</p>
         </div>
 
         <div className="embla max-w-4xl mx-auto" ref={emblaRef}>
@@ -86,18 +86,18 @@ export function Testimonials() {
                 key={testimonial.id} 
                 className="embla__slide flex-[0_0_100%] md:flex-[0_0_80%] px-4"
               >
-                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 text-center h-full flex flex-col items-center justify-center">
+                <div className="bg-background p-8 md:p-10 rounded-2xl shadow-sm border border-border text-center h-full flex flex-col items-center justify-center">
                   <div className="flex mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-xl md:text-2xl font-medium leading-relaxed text-gray-900 mb-8 italic">
+                  <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground mb-8 italic">
                     "{testimonial.text}"
                   </p>
                   <div>
-                    <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500 mt-1">Purchased: {testimonial.product}</p>
+                    <h4 className="font-bold text-foreground">{testimonial.name}</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Purchased: {testimonial.product}</p>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@ export function Testimonials() {
               key={idx}
               onClick={() => emblaApi?.scrollTo(idx)}
               className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                idx === selectedIndex ? "bg-black" : "bg-gray-300"
+                idx === selectedIndex ? "bg-brand" : "bg-gray-300"
               }`}
               aria-label={`Go to testimonial ${idx + 1}`}
             />

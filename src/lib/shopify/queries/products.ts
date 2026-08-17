@@ -10,9 +10,10 @@ export async function getProducts({ sortKey = 'BEST_SELLING', reverse = false, q
           handle
           title
           vendor
+          availableForSale
           images(first: 2) { nodes { url } }
           priceRange { minVariantPrice { amount currencyCode } }
-          variants(first: 1) { nodes { price { amount currencyCode } compareAtPrice { amount currencyCode } } }
+          variants(first: 1) { nodes { id availableForSale price { amount currencyCode } compareAtPrice { amount currencyCode } } }
         }
       }
     }
@@ -32,10 +33,23 @@ export async function getProductByHandle(handle: string) {
         handle
         title
         vendor
+        description
         descriptionHtml
-        images(first: 10) { nodes { url } }
+        availableForSale
+        images(first: 10) { nodes { url altText } }
+        options { id name values }
         priceRange { minVariantPrice { amount currencyCode } }
-        variants(first: 250) { nodes { id title price { amount currencyCode } compareAtPrice { amount currencyCode } } }
+        variants(first: 250) {
+          nodes {
+            id
+            title
+            availableForSale
+            price { amount currencyCode }
+            compareAtPrice { amount currencyCode }
+            selectedOptions { name value }
+            image { url altText }
+          }
+        }
       }
     }
   `;
@@ -51,12 +65,14 @@ export async function getProductRecommendations(productId: string) {
         handle
         title
         vendor
+        availableForSale
         images(first: 2) { nodes { url } }
         priceRange { minVariantPrice { amount currencyCode } }
-        variants(first: 1) { nodes { price { amount currencyCode } compareAtPrice { amount currencyCode } } }
+        variants(first: 1) { nodes { id availableForSale price { amount currencyCode } compareAtPrice { amount currencyCode } } }
       }
     }
   `;
   const res = await shopifyFetch<any>({ query: gql, variables: { productId } });
   return res.data?.productRecommendations || [];
 }
+

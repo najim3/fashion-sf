@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { MegaMenu } from "./mega-menu";
 import { MobileNav } from "./mobile-nav";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { WishlistDrawer } from "@/components/wishlist/wishlist-drawer";
 import { SearchOverlay } from "@/components/search/search-overlay";
 import { useWishlistStore } from "@/stores/wishlist-store";
 
@@ -15,27 +16,28 @@ export function Header() {
   const wishlistItems = useWishlistStore((state) => state.items);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    
+
     const handleOpenCart = () => setIsCartOpen(true);
-    window.addEventListener('open-cart', handleOpenCart);
-    
+    window.addEventListener("open-cart", handleOpenCart);
+
     return () => {
-      window.removeEventListener('open-cart', handleOpenCart);
+      window.removeEventListener("open-cart", handleOpenCart);
     };
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4 md:hidden">
           <button
             onClick={() => setIsMobileNavOpen(true)}
-            className="p-2 -ml-2 text-gray-900"
+            className="p-2 -ml-2 text-foreground"
           >
             <Menu className="w-5 h-5" />
             <span className="sr-only">Open menu</span>
@@ -55,42 +57,42 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <button 
+          <button
             onClick={() => setIsSearchOpen(true)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-900"
+            className="p-2 hover:bg-muted rounded-full transition-colors text-foreground"
           >
             <Search className="w-5 h-5" />
             <span className="sr-only">Search</span>
           </button>
 
-          <Link
-            href="/wishlist"
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors relative text-gray-900"
+          <button
+            onClick={() => setIsWishlistOpen(true)}
+            className="p-2 hover:bg-muted rounded-full transition-colors relative text-foreground"
           >
             <Heart className="w-5 h-5" />
             {isMounted && wishlistItems.length > 0 && (
-              <span className="absolute top-1 right-1 w-4 h-4 bg-black text-white text-[10px] font-bold flex items-center justify-center rounded-full">
+              <span className="absolute top-1 right-1 w-4 h-4 bg-brand text-brand-foreground text-[10px] font-bold flex items-center justify-center rounded-full">
                 {wishlistItems.length}
               </span>
             )}
             <span className="sr-only">Wishlist</span>
-          </Link>
+          </button>
 
           <Link
             href="/account"
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors hidden sm:block text-gray-900"
+            className="p-2 hover:bg-muted rounded-full transition-colors hidden sm:block text-foreground"
           >
             <User className="w-5 h-5" />
             <span className="sr-only">Account</span>
           </Link>
 
-          <button 
+          <button
             onClick={() => setIsCartOpen(true)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors relative text-gray-900"
+            className="p-2 hover:bg-muted rounded-full transition-colors relative text-foreground"
           >
             <ShoppingBag className="w-5 h-5" />
             {isMounted && (totalQuantity ?? 0) > 0 && (
-              <span className="absolute top-1 right-1 w-4 h-4 bg-black text-white text-[10px] font-bold flex items-center justify-center rounded-full">
+              <span className="absolute top-1 right-1 w-4 h-4 bg-brand text-brand-foreground text-[10px] font-bold flex items-center justify-center rounded-full">
                 {totalQuantity}
               </span>
             )}
@@ -103,13 +105,15 @@ export function Header() {
         isOpen={isMobileNavOpen}
         onClose={() => setIsMobileNavOpen(false)}
       />
-      
-      <CartDrawer 
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
+
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+
+      <WishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
       />
-      
-      <SearchOverlay 
+
+      <SearchOverlay
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
       />

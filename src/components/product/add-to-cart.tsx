@@ -8,54 +8,61 @@ import { toast } from "sonner";
 
 interface AddToCartProps {
   variantId?: string;
-  availableForSale: boolean;
+  availableForSale?: boolean;
 }
 
-export function AddToCart({ variantId, availableForSale }: AddToCartProps) {
+export function AddToCart({ variantId, availableForSale = true }: AddToCartProps) {
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
-  const { linesAdd } = useCart();
+  const { linesAdd, checkoutUrl } = useCart();
   const [isAdding, setIsAdding] = useState(false);
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleAddToCart = () => {
-    if (!variantId) return;
+    if (!variantId) {
+      toast.error("Please select an option before adding to cart.");
+      return;
+    }
     
     setIsAdding(true);
     // Add to Shopify Hydrogen cart
     linesAdd([{ merchandiseId: variantId, quantity }]);
     
-    // Simulate slight delay for UX
     setTimeout(() => {
       setIsAdding(false);
       toast.success("Added to cart", {
         description: `Successfully added ${quantity} item(s) to your cart.`
       });
-      window.dispatchEvent(new CustomEvent('open-cart'));
-    }, 500);
+    }, 400);
   };
 
   const handleBuyNow = () => {
-    if (!variantId) return;
+    if (!variantId) {
+      toast.error("Please select an option first.");
+      return;
+    }
     
-    // For "Buy Now", typically we create a separate checkout just for this item
-    // or just add to cart and redirect to checkout.
-    // For now we'll just add to cart and alert.
     linesAdd([{ merchandiseId: variantId, quantity }]);
-    alert("Redirecting to checkout...");
+    
+    setTimeout(() => {
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else if (typeof window !== "undefined") {
+        window.location.href = "/cart";
+      }
+    }, 500);
   };
 
   return (
     <div className="space-y-6">
       {/* Quantity & Stock Status */}
       <div className="flex items-center gap-4">
-        <div className="flex items-center border border-gray-300 rounded-md">
+        <div className="flex items-center border border-border rounded-md">
           <button 
             type="button"
             onClick={decreaseQuantity}
-            className="p-3 text-gray-500 hover:text-black transition-colors"
+            className="p-3 text-muted-foreground hover:text-foreground transition-colors"
             disabled={quantity <= 1 || !availableForSale}
             aria-label="Decrease quantity"
           >
@@ -65,7 +72,7 @@ export function AddToCart({ variantId, availableForSale }: AddToCartProps) {
           <button 
             type="button"
             onClick={increaseQuantity}
-            className="p-3 text-gray-500 hover:text-black transition-colors"
+            className="p-3 text-muted-foreground hover:text-foreground transition-colors"
             disabled={!availableForSale}
             aria-label="Increase quantity"
           >
@@ -86,7 +93,7 @@ export function AddToCart({ variantId, availableForSale }: AddToCartProps) {
         <button
           onClick={handleAddToCart}
           disabled={!availableForSale || !variantId || isAdding}
-          className="w-full py-4 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full py-4 bg-brand text-brand-foreground rounded-md font-medium hover:opacity-90 hover:bg-brand transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           <ShoppingBag className="w-5 h-5" />
           {isAdding ? "Adding..." : "Add to Cart"}
@@ -95,7 +102,7 @@ export function AddToCart({ variantId, availableForSale }: AddToCartProps) {
         <button
           onClick={handleBuyNow}
           disabled={!availableForSale || !variantId}
-          className="w-full py-4 bg-gray-100 text-black rounded-md font-medium hover:bg-gray-200 transition-colors disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+          className="w-full py-4 bg-muted text-foreground rounded-md font-medium hover:bg-muted transition-colors disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed"
         >
           Buy it now
         </button>

@@ -10,5 +10,7 @@ export function mapShopifyProductToProduct(shopifyProduct: any) {
     image: shopifyProduct.images?.nodes?.[0]?.url || shopifyProduct.featuredImage?.url || '',
     secondaryImage: shopifyProduct.images?.nodes?.[1]?.url || '',
     isNew: shopifyProduct.tags?.includes('new'),
+    variantId: shopifyProduct.variants?.nodes?.[0]?.id,
+    availableForSale: shopifyProduct.availableForSale ?? shopifyProduct.variants?.nodes?.[0]?.availableForSale ?? true,
   };
 }

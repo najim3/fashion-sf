@@ -38,7 +38,7 @@ export default async function ProductsPage({
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
           <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Shop All</h1>
-          <p className="text-gray-600">Discover our latest collection of premium fashion.</p>
+          <p className="text-muted-foreground">Discover our latest collection of premium fashion.</p>
         </div>
         <div className="flex items-center gap-4">
           <ProductSort />

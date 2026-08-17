@@ -17,13 +17,13 @@ export function AnnouncementBar() {
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          className="bg-black text-white overflow-hidden relative"
+          className="bg-brand text-brand-foreground overflow-hidden relative"
         >
           <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm font-medium">
             <p>{text}</p>
             <button 
               onClick={() => setIsVisible(false)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:text-gray-300 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:text-muted-foreground transition-colors"
             >
               <X className="w-4 h-4" />
               <span className="sr-only">Dismiss</span>

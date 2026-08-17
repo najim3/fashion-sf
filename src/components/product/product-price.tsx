@@ -10,7 +10,7 @@ export function ProductPrice({ price, compareAtPrice }: { price: any; compareAtP
       ) : null}
       
       {compareAtPrice && (
-        <Money data={compareAtPrice} className="text-lg text-gray-500 line-through" />
+        <Money data={compareAtPrice} className="text-lg text-muted-foreground line-through" />
       )}
       
       {compareAtPrice && price && 

@@ -9,6 +9,7 @@ import { ProductDetailsTabs } from "@/components/product/product-details-tabs";
 import { RelatedProducts } from "@/components/product/related-products";
 import { WishlistButton } from "@/components/product/wishlist-button";
 import { generateProductJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const revalidate = 60; // ISR
 
@@ -24,7 +25,7 @@ export async function generateMetadata({
     return { title: "Product Not Found" };
   }
 
-  const imageUrl = product.images?.edges?.[0]?.node?.url;
+  const imageUrl = product.images?.nodes?.[0]?.url;
 
   return {
     title: `${product.seo?.title || product.title} | Fashion SF`,
@@ -51,35 +52,32 @@ export default async function ProductPage({
   }
 
   // Find the selected variant based on URL search params
-  const variants = product.variants?.edges?.map((e: any) => e.node) || [];
+  const variants = product.variants?.nodes || [];
   
   // Create a default fallback variant if none explicitly matched
   let selectedVariant = variants[0];
   
   if (Object.keys(resolvedSearchParams).length > 0) {
     const matchedVariant = variants.find((variant: any) => {
-      // Check if every param matches the variant's selected options
-      return variant.selectedOptions.every(
-        (option: any) => {
-          const paramValue = resolvedSearchParams[option.name.toLowerCase()];
-          // If param is not in URL, we consider it a match (or we could strictly require all params)
-          // For now, strict match if the param exists
-          return !paramValue || paramValue === option.value;
-        }
-      );
+      if (!variant.selectedOptions) return false;
+      return variant.selectedOptions.every((option: any) => {
+        const rawParamValue = resolvedSearchParams[option.name.toLowerCase()];
+        const paramValue = Array.isArray(rawParamValue) ? rawParamValue[0] : rawParamValue;
+        return !paramValue || paramValue === option.value;
+      });
     });
     if (matchedVariant) {
       selectedVariant = matchedVariant;
     }
   }
 
-  const images = product.images?.edges?.map((e: any) => e.node) || [];
+  const images = product.images?.nodes || [];
   const options = product.options || [];
 
   // Determine which price to show (variant price or product min price)
   const displayPrice = selectedVariant?.price || product.priceRange?.minVariantPrice;
   const compareAtPrice = selectedVariant?.compareAtPrice;
-  const availableForSale = selectedVariant?.availableForSale ?? product.availableForSale;
+  const availableForSale = selectedVariant?.availableForSale ?? product.availableForSale ?? true;
 
   // Generate JSON-LD Structured Data
   const productJsonLd = generateProductJsonLd({
@@ -121,10 +119,13 @@ export default async function ProductPage({
           
           {/* Right Column: Details & Add to Cart */}
           <div className="md:w-1/2 lg:w-2/5 flex flex-col">
-            {/* Breadcrumb could go here */}
+            <Breadcrumbs items={[
+              { name: "Products", url: "/products" },
+              { name: product.title, url: `/products/${product.handle}` }
+            ]} />
             
             {product.vendor && (
-              <span className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">
+              <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">
                 {product.vendor}
               </span>
             )}
@@ -135,13 +136,13 @@ export default async function ProductPage({
               </h1>
               <WishlistButton 
                 productHandle={product.handle} 
-                className="bg-gray-100 hover:bg-gray-200" 
+                className="bg-muted hover:bg-muted" 
               />
             </div>
             
             <ProductPrice price={displayPrice} compareAtPrice={compareAtPrice} />
             
-            <div className="prose prose-sm text-gray-600 mb-8 max-w-none">
+            <div className="prose prose-sm text-muted-foreground mb-8 max-w-none">
               <p>{product.description}</p>
             </div>
             

@@ -43,7 +43,7 @@ export function NewsletterSignup() {
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
           Join Our Newsletter
         </h2>
-        <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
+        <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
           Subscribe to receive updates, access to exclusive deals, and more. 
           We respect your privacy and will never share your information.
         </p>
@@ -52,7 +52,7 @@ export function NewsletterSignup() {
           <div className="flex flex-col items-center justify-center space-y-3 animate-in fade-in zoom-in duration-500">
             <CheckCircle2 className="w-12 h-12 text-green-400" />
             <h3 className="text-xl font-medium">Thank you for subscribing!</h3>
-            <p className="text-gray-400">You're now on the list.</p>
+            <p className="text-muted-foreground">You're now on the list.</p>
           </div>
         ) : (
           <form 
@@ -63,7 +63,7 @@ export function NewsletterSignup() {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="w-full px-5 py-4 bg-white/10 border border-gray-700 rounded-full focus:outline-none focus:border-white focus:bg-white/20 transition-colors text-white placeholder:text-gray-500"
+                className="w-full px-5 py-4 bg-background/10 border border-gray-700 rounded-full focus:outline-none focus:border-white focus:bg-background/20 transition-colors text-white placeholder:text-muted-foreground"
                 {...register("email")}
                 disabled={isSubmitting}
               />
@@ -76,10 +76,10 @@ export function NewsletterSignup() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap h-[58px]"
+              className="bg-background text-foreground hover:bg-muted px-8 py-4 rounded-full font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap h-[58px]"
             >
               {isSubmitting ? (
-                <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+                <span className="w-5 h-5 border-2 border-foreground border-t-transparent rounded-full animate-spin"></span>
               ) : (
                 <>
                   Subscribe <Send className="w-4 h-4" />

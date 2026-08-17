@@ -26,8 +26,8 @@ export function CartItem({ line }: CartItemProps) {
   };
 
   return (
-    <div className="flex gap-4 py-6 border-b border-gray-100 last:border-0">
-      <Link href={`/products/${product.handle}`} className="relative h-24 w-20 md:h-32 md:w-24 flex-shrink-0 bg-gray-100">
+    <div className="flex gap-4 py-6 border-b border-border last:border-0">
+      <Link href={`/products/${product.handle}`} className="relative h-24 w-20 md:h-32 md:w-24 flex-shrink-0 bg-muted">
         {merchandise.image && (
           <Image
             src={merchandise.image.url}
@@ -42,16 +42,16 @@ export function CartItem({ line }: CartItemProps) {
         <div className="flex justify-between gap-2">
           <div>
             {product.vendor && (
-              <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">{product.vendor}</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">{product.vendor}</p>
             )}
             <Link href={`/products/${product.handle}`}>
-              <h3 className="font-medium text-gray-900 line-clamp-2 hover:underline">
+              <h3 className="font-medium text-foreground line-clamp-2 hover:underline">
                 {product.title}
               </h3>
             </Link>
             
             {merchandise.selectedOptions.map((option: any) => (
-              <p key={option.name} className="text-sm text-gray-500 mt-1">
+              <p key={option.name} className="text-sm text-muted-foreground mt-1">
                 {option.name}: {option.value}
               </p>
             ))}
@@ -62,10 +62,10 @@ export function CartItem({ line }: CartItemProps) {
         </div>
 
         <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center border border-gray-300 rounded-md">
+          <div className="flex items-center border border-border rounded-md">
             <button
               onClick={() => handleUpdateQuantity(line.quantity - 1)}
-              className="p-2 text-gray-500 hover:text-black transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Decrease quantity"
             >
               <Minus className="w-3 h-3" />
@@ -73,7 +73,7 @@ export function CartItem({ line }: CartItemProps) {
             <span className="w-8 text-center text-sm font-medium">{line.quantity}</span>
             <button
               onClick={() => handleUpdateQuantity(line.quantity + 1)}
-              className="p-2 text-gray-500 hover:text-black transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Increase quantity"
             >
               <Plus className="w-3 h-3" />
@@ -82,7 +82,7 @@ export function CartItem({ line }: CartItemProps) {
           
           <button
             onClick={() => linesRemove([line.id])}
-            className="text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1 text-sm"
+            className="text-muted-foreground hover:text-red-500 transition-colors flex items-center gap-1 text-sm"
           >
             <Trash2 className="w-4 h-4" />
             <span className="sr-only">Remove item</span>

@@ -14,7 +14,7 @@ export default function CartPage() {
   if (status === "uninitialized" || status === "fetching") {
     return (
       <div className="container mx-auto px-4 py-32 flex justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground"></div>
       </div>
     );
   }
@@ -22,16 +22,16 @@ export default function CartPage() {
   if (isEmpty) {
     return (
       <div className="container mx-auto px-4 py-32 flex flex-col items-center text-center">
-        <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mb-6">
+        <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center text-muted-foreground mb-6">
           <ShoppingBag className="w-12 h-12" />
         </div>
         <h1 className="text-3xl font-display font-bold mb-4">Your cart is empty</h1>
-        <p className="text-gray-500 mb-8 max-w-md">
+        <p className="text-muted-foreground mb-8 max-w-md">
           Looks like you haven't added anything to your cart yet. Browse our collections to find something you'll love.
         </p>
         <Link
           href="/collections"
-          className="px-8 py-4 bg-black text-white font-medium rounded-md hover:bg-gray-900 transition-colors"
+          className="px-8 py-4 bg-brand text-brand-foreground font-medium rounded-md hover:opacity-90 hover:bg-brand transition-colors"
         >
           Start Shopping
         </Link>
@@ -49,7 +49,7 @@ export default function CartPage() {
       <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
         {/* Cart Items */}
         <div className="flex-1">
-          <div className="border-t border-gray-200">
+          <div className="border-t border-border">
             {lines?.map((line: any) => (
               <CartItem key={line.id} line={line} />
             ))}

@@ -32,20 +32,20 @@ export function ErrorBoundary({
         {title}
       </h1>
       
-      <p className="text-gray-600 max-w-md mb-8">
+      <p className="text-muted-foreground max-w-md mb-8">
         {message}
       </p>
       
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={() => reset()}
-          className="px-8 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-900 transition-colors"
+          className="px-8 py-3 bg-brand text-brand-foreground font-medium rounded-md hover:opacity-90 hover:bg-brand transition-colors"
         >
           Try Again
         </button>
         <Link
           href="/"
-          className="px-8 py-3 bg-gray-100 text-gray-900 font-medium rounded-md hover:bg-gray-200 transition-colors"
+          className="px-8 py-3 bg-muted text-foreground font-medium rounded-md hover:bg-muted transition-colors"
         >
           Go to Homepage
         </Link>

@@ -103,25 +103,25 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const hasResults = results.products.length > 0 || results.collections.length > 0 || results.queries.length > 0;
 
   return (
-    <div className="fixed inset-0 z-[110] bg-white flex flex-col animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-[110] bg-background flex flex-col animate-in fade-in zoom-in-95 duration-200">
       {/* Header / Search Bar */}
-      <div className="border-b border-gray-200 px-4 md:px-8 py-4 flex items-center gap-4">
+      <div className="border-b border-border px-4 md:px-8 py-4 flex items-center gap-4">
         <form onSubmit={handleSubmit} className="flex-1 flex items-center relative">
-          <Search className="w-5 h-5 text-gray-400 absolute left-0" />
+          <Search className="w-5 h-5 text-muted-foreground absolute left-0" />
           <input
             ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for products, collections..."
-            className="w-full bg-transparent border-none focus:ring-0 text-xl md:text-2xl py-2 pl-10 pr-4 placeholder:text-gray-300"
+            className="w-full bg-transparent border-none focus:ring-0 text-xl md:text-2xl py-2 pl-10 pr-4 placeholder:text-muted-foreground"
             autoComplete="off"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-0 p-2 text-gray-400 hover:text-black"
+              className="absolute right-0 p-2 text-muted-foreground hover:text-foreground"
             >
               <X className="w-5 h-5" />
             </button>
@@ -129,7 +129,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         </form>
         <button
           onClick={onClose}
-          className="text-sm font-medium uppercase tracking-wider text-gray-500 hover:text-black shrink-0"
+          className="text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground shrink-0"
         >
           Cancel
         </button>
@@ -140,10 +140,10 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
         <div className="container mx-auto max-w-5xl">
           {isLoading ? (
             <div className="flex justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-gray-300" />
+              <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
             </div>
           ) : query && !hasResults ? (
-            <div className="text-center py-20 text-gray-500">
+            <div className="text-center py-20 text-muted-foreground">
               No results found for "{query}". Try checking your spelling or using less specific terms.
             </div>
           ) : query ? (
@@ -151,7 +151,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               {/* Suggestions */}
               {results.queries.length > 0 && (
                 <div className="space-y-4">
-                  <h3 className="text-sm font-medium uppercase tracking-widest text-gray-500 border-b border-gray-100 pb-2">
+                  <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground border-b border-border pb-2">
                     Suggestions
                   </h3>
                   <ul className="space-y-2">
@@ -159,9 +159,9 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                       <li key={i}>
                         <button 
                           onClick={() => handleSuggestionClick(q.text)}
-                          className="flex items-center gap-2 text-gray-700 hover:text-black hover:underline"
+                          className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:underline"
                         >
-                          <Search className="w-4 h-4 text-gray-400" />
+                          <Search className="w-4 h-4 text-muted-foreground" />
                           <span dangerouslySetInnerHTML={{ __html: q.text.replace(new RegExp(`(${query})`, 'gi'), '<b>$1</b>') }} />
                         </button>
                       </li>
@@ -173,7 +173,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               {/* Collections */}
               {results.collections.length > 0 && (
                 <div className="space-y-4">
-                  <h3 className="text-sm font-medium uppercase tracking-widest text-gray-500 border-b border-gray-100 pb-2">
+                  <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground border-b border-border pb-2">
                     Collections
                   </h3>
                   <ul className="space-y-3">
@@ -195,7 +195,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               {/* Products */}
               {results.products.length > 0 && (
                 <div className="space-y-4 md:col-span-2 lg:col-span-1">
-                  <h3 className="text-sm font-medium uppercase tracking-widest text-gray-500 border-b border-gray-100 pb-2">
+                  <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground border-b border-border pb-2">
                     Products
                   </h3>
                   <div className="space-y-4">
@@ -206,7 +206,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                         onClick={onClose}
                         className="group flex gap-4 items-center"
                       >
-                        <div className="w-16 h-20 bg-gray-100 relative overflow-hidden flex-shrink-0">
+                        <div className="w-16 h-20 bg-muted relative overflow-hidden flex-shrink-0">
                           {p.image && (
                             <Image 
                               src={p.image} 
@@ -227,7 +227,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   </div>
                   <button
                     onClick={() => handleSuggestionClick(query)}
-                    className="mt-6 text-sm font-medium underline underline-offset-4 flex items-center gap-1 hover:text-gray-600 transition-colors"
+                    className="mt-6 text-sm font-medium underline underline-offset-4 flex items-center gap-1 hover:text-muted-foreground transition-colors"
                   >
                     View all results for "{query}"
                   </button>
@@ -239,7 +239,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             <div className="max-w-md mx-auto mt-10">
               {recentSearches.length > 0 && (
                 <>
-                  <h3 className="text-sm font-medium uppercase tracking-widest text-gray-500 mb-4 text-center">
+                  <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4 text-center">
                     Recent Searches
                   </h3>
                   <div className="flex flex-wrap gap-2 justify-center">
@@ -247,7 +247,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                       <button
                         key={i}
                         onClick={() => handleSuggestionClick(s)}
-                        className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm transition-colors"
+                        className="px-4 py-2 bg-muted hover:bg-muted rounded-full text-sm transition-colors"
                       >
                         {s}
                       </button>

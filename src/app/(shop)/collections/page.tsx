@@ -22,7 +22,7 @@ export default async function CollectionsPage() {
           <Link 
             key={collection.id} 
             href={`/collections/${collection.handle}`}
-            className="group relative aspect-[4/3] overflow-hidden bg-gray-100 flex items-center justify-center"
+            className="group relative aspect-[4/3] overflow-hidden bg-muted flex items-center justify-center"
           >
             {collection.image ? (
               <Image
@@ -34,7 +34,7 @@ export default async function CollectionsPage() {
             ) : (
               <div className="absolute inset-0 bg-gray-200" />
             )}
-            <div className="absolute inset-0 bg-black/30 transition-opacity group-hover:bg-black/40" />
+            <div className="absolute inset-0 bg-brand/30 transition-opacity group-hover:bg-brand/40" />
             <div className="absolute inset-0 flex items-center justify-center">
               <h2 className="text-white text-2xl font-display font-bold tracking-wider uppercase text-center px-4 drop-shadow-md">
                 {collection.title}

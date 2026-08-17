@@ -28,15 +28,15 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-sm rounded-lg border bg-white p-6 shadow-sm">
+      <div className="w-full max-w-sm rounded-lg border bg-background p-6 shadow-sm">
         <h1 className="mb-2 text-2xl font-bold text-center">Login</h1>
-        <p className="mb-6 text-sm text-gray-500 text-center">
+        <p className="mb-6 text-sm text-muted-foreground text-center">
           Login to manage your account and orders.
         </p>
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="w-full rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800 disabled:opacity-50"
+          className="w-full rounded-md bg-brand px-4 py-2 text-white hover:bg-gray-800 disabled:opacity-50"
         >
           {loading ? 'Redirecting...' : 'Continue with Shopify'}
         </button>

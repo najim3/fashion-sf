@@ -39,8 +39,8 @@ export function VariantSelector({ options, variants }: VariantSelectorProps) {
         return (
           <div key={option.id}>
             <div className="flex justify-between items-center mb-2">
-              <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
-              <span className="text-sm text-gray-500">{currentSelectedValue}</span>
+              <h3 className="text-sm font-medium text-foreground">{option.name}</h3>
+              <span className="text-sm text-muted-foreground">{currentSelectedValue}</span>
             </div>
             
             <div className="flex flex-wrap gap-3">
@@ -56,11 +56,11 @@ export function VariantSelector({ options, variants }: VariantSelectorProps) {
                       title={value}
                       className={cn(
                         "w-8 h-8 rounded-full border-2 transition-all",
-                        isSelected ? "border-black p-0.5" : "border-transparent hover:border-gray-300"
+                        isSelected ? "border-foreground p-0.5" : "border-transparent hover:border-border"
                       )}
                     >
                       <span 
-                        className="block w-full h-full rounded-full border border-gray-200"
+                        className="block w-full h-full rounded-full border border-border"
                         style={{ backgroundColor: value.toLowerCase().replace(" ", "") }}
                       />
                     </button>
@@ -75,8 +75,8 @@ export function VariantSelector({ options, variants }: VariantSelectorProps) {
                     className={cn(
                       "min-w-[3rem] px-3 py-2 text-sm border rounded-md transition-colors",
                       isSelected
-                        ? "border-black bg-black text-white font-medium"
-                        : "border-gray-200 bg-white text-gray-900 hover:border-gray-900"
+                        ? "border-foreground bg-brand text-brand-foreground font-medium"
+                        : "border-border bg-background text-foreground hover:border-gray-900"
                     )}
                   >
                     {value}

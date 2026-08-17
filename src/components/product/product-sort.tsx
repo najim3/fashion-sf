@@ -74,20 +74,20 @@ export function ProductSort() {
     <div className="relative" ref={dropdownRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 py-2 px-4 border border-gray-200 bg-white hover:bg-gray-50 text-sm font-medium rounded-md transition-colors"
+        className="flex items-center gap-2 py-2 px-4 border border-border bg-background hover:bg-muted text-sm font-medium rounded-md transition-colors"
       >
         <span>Sort by: <span className="font-semibold">{currentLabel}</span></span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-md shadow-lg z-50 overflow-hidden">
+        <div className="absolute right-0 mt-2 w-48 bg-background border border-border rounded-md shadow-lg z-50 overflow-hidden">
           <ul className="py-1">
             {SORT_OPTIONS.map((option) => (
               <li key={option.value}>
                 <button
                   onClick={() => handleSort(option.value)}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center justify-between transition-colors"
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-muted flex items-center justify-between transition-colors"
                 >
                   <span className={option.value === currentValue ? "font-semibold" : ""}>
                     {option.label}

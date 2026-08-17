@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -15,11 +15,24 @@ interface ProductGalleryProps {
 
 export function ProductGallery({ images }: ProductGalleryProps) {
   const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [transformOrigin, setTransformOrigin] = useState("50% 50%");
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setTransformOrigin(`${x}% ${y}%`);
+  };
+
+  const handleMouseLeave = () => {
+    // Reset to center when mouse leaves
+    setTransformOrigin("50% 50%");
+  };
 
   if (!images || images.length === 0) {
     return (
-      <div className="aspect-[3/4] bg-gray-100 flex items-center justify-center">
-        <span className="text-gray-400">No image available</span>
+      <div className="aspect-[3/4] bg-muted flex items-center justify-center">
+        <span className="text-muted-foreground">No image available</span>
       </div>
     );
   }
@@ -34,7 +47,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
               key={index}
               onClick={() => setSelectedImage(image)}
               className={cn(
-                "relative flex-shrink-0 w-20 aspect-[3/4] overflow-hidden bg-gray-100 snap-center transition-all",
+                "relative flex-shrink-0 w-20 aspect-[3/4] overflow-hidden bg-muted snap-center transition-all",
                 selectedImage.url === image.url 
                   ? "ring-2 ring-black" 
                   : "opacity-60 hover:opacity-100"
@@ -52,13 +65,18 @@ export function ProductGallery({ images }: ProductGalleryProps) {
       )}
 
       {/* Main Image */}
-      <div className="relative flex-1 aspect-[3/4] bg-gray-100 overflow-hidden group">
+      <div 
+        className="relative flex-1 aspect-[3/4] bg-muted overflow-hidden group cursor-zoom-in"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
         <Image
           src={selectedImage.url}
           alt={selectedImage.altText || "Product main image"}
           fill
           priority
-          className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-110 cursor-zoom-in"
+          className="object-cover transition-transform duration-200 ease-out md:group-hover:scale-150"
+          style={{ transformOrigin }}
         />
       </div>
     </div>

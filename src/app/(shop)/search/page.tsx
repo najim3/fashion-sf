@@ -27,12 +27,12 @@ export default async function SearchPage({
     return (
       <div className="container mx-auto px-4 py-20 text-center min-h-[50vh] flex flex-col items-center justify-center">
         <h1 className="text-3xl font-display font-bold mb-4">Search</h1>
-        <p className="text-gray-600 mb-8 max-w-md mx-auto">
+        <p className="text-muted-foreground mb-8 max-w-md mx-auto">
           Please enter a search term to find products.
         </p>
         <Link 
           href="/collections" 
-          className="px-6 py-3 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition-colors"
+          className="px-6 py-3 bg-brand text-brand-foreground rounded-md font-medium hover:opacity-90 hover:bg-brand transition-colors"
         >
           Browse Collections
         </Link>
@@ -55,12 +55,12 @@ export default async function SearchPage({
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
       <div className="flex flex-col items-center text-center mb-12">
-        <p className="text-sm text-gray-500 uppercase tracking-widest mb-2">Search Results</p>
+        <p className="text-sm text-muted-foreground uppercase tracking-widest mb-2">Search Results</p>
         <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">
           "{query}"
         </h1>
         {hasResults && (
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Showing {mappedProducts.length} results
           </p>
         )}
@@ -68,12 +68,12 @@ export default async function SearchPage({
 
       {!hasResults ? (
         <div className="text-center py-12">
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             We couldn't find anything matching your search.
           </p>
-          <div className="max-w-md mx-auto bg-gray-50 p-6 rounded-lg text-left">
+          <div className="max-w-md mx-auto bg-muted p-6 rounded-lg text-left">
             <h3 className="font-medium mb-2">Search Tips:</h3>
-            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+            <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
               <li>Check your spelling for typos.</li>
               <li>Try using more general terms.</li>
               <li>Try using different keywords.</li>

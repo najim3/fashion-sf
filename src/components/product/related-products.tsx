@@ -19,7 +19,7 @@ export async function RelatedProducts({ productId }: RelatedProductsProps) {
   const mappedProducts = recommendations.slice(0, 4).map(mapShopifyProductToProduct);
 
   return (
-    <div className="py-12 md:py-16 mt-12 border-t border-gray-100">
+    <div className="py-12 md:py-16 mt-12 border-t border-border">
       <h2 className="text-2xl md:text-3xl font-display font-bold mb-8 text-center">
         You May Also Like
       </h2>

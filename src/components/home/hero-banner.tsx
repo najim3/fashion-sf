@@ -45,13 +45,13 @@ export function HeroBanner() {
         >
           <Link 
             href="/collections/new-arrivals" 
-            className="bg-white text-black hover:bg-gray-100 px-8 py-4 rounded-full font-medium transition-colors text-center"
+            className="bg-background text-foreground hover:bg-muted px-8 py-4 rounded-full font-medium transition-colors text-center"
           >
             Shop New Arrivals
           </Link>
           <Link 
             href="/collections/all" 
-            className="bg-transparent border border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-medium transition-colors text-center"
+            className="bg-transparent border border-white text-white hover:bg-background/10 px-8 py-4 rounded-full font-medium transition-colors text-center"
           >
             View All Collections
           </Link>

@@ -44,8 +44,8 @@ export function Pagination({ pageInfo }: PaginationProps) {
         className={cn(
           "flex items-center gap-2 px-4 py-2 border rounded-md transition-colors",
           pageInfo.hasPreviousPage 
-            ? "border-gray-300 hover:bg-gray-50 text-gray-900" 
-            : "border-gray-200 text-gray-400 cursor-not-allowed"
+            ? "border-border hover:bg-muted text-foreground" 
+            : "border-border text-muted-foreground cursor-not-allowed"
         )}
       >
         <ChevronLeft className="w-4 h-4" />
@@ -58,8 +58,8 @@ export function Pagination({ pageInfo }: PaginationProps) {
         className={cn(
           "flex items-center gap-2 px-4 py-2 border rounded-md transition-colors",
           pageInfo.hasNextPage 
-            ? "border-gray-300 hover:bg-gray-50 text-gray-900" 
-            : "border-gray-200 text-gray-400 cursor-not-allowed"
+            ? "border-border hover:bg-muted text-foreground" 
+            : "border-border text-muted-foreground cursor-not-allowed"
         )}
       >
         Next

@@ -23,7 +23,7 @@ export function WishlistButton({ productHandle, className }: WishlistButtonProps
   if (!isMounted) {
     return (
       <button 
-        className={cn("p-2 bg-white/80 backdrop-blur-sm rounded-full text-gray-400 cursor-not-allowed opacity-50", className)}
+        className={cn("p-2 bg-background/80 backdrop-blur-sm rounded-full text-muted-foreground cursor-not-allowed opacity-50", className)}
         disabled
       >
         <Heart className="w-4 h-4" />
@@ -54,7 +54,7 @@ export function WishlistButton({ productHandle, className }: WishlistButtonProps
     <button
       onClick={handleToggle}
       className={cn(
-        "p-2 bg-white/80 backdrop-blur-sm rounded-full transition-all hover:bg-white text-gray-900 group",
+        "p-2 bg-background/80 backdrop-blur-sm rounded-full transition-all hover:bg-background text-foreground group",
         isAnimating && "scale-110",
         className
       )}

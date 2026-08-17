@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
+import { cn } from "@/lib/utils";
+
+const ibmPlexSans = IBM_Plex_Sans({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", inter.variable, outfit.variable, "font-sans", ibmPlexSans.variable)}
     >
       <body className="min-h-full flex flex-col font-sans">
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>

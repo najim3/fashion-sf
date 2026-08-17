@@ -8,10 +8,8 @@ import { getProductsByHandles } from "@/lib/actions/wishlist";
 import { ProductCard } from "@/components/product/product-card";
 
 export default function WishlistPage() {
-  const { items, isMounted } = useWishlistStore((state) => ({
-    items: state.items,
-    isMounted: true // In a real app we'd need to properly handle hydration mismatch, but for this demo we'll use a simple state check below
-  }));
+  const items = useWishlistStore((state) => state.items);
+  const removeItem = useWishlistStore((state) => state.removeItem);
   
   const [products, setProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,8 +29,17 @@ export default function WishlistPage() {
       
       setIsLoading(true);
       try {
-        const data = await getProductsByHandles(items);
-        setProducts(data);
+        const fetched = await getProductsByHandles(items);
+        const validProducts = (fetched || []).filter(Boolean);
+        setProducts(validProducts);
+
+        // Prune any stale handles stored locally that do not exist in Shopify
+        const validHandles = new Set(validProducts.map((p: any) => p.handle));
+        items.forEach((handle) => {
+          if (!validHandles.has(handle)) {
+            removeItem(handle);
+          }
+        });
       } catch (error) {
         console.error("Error fetching wishlist:", error);
       } finally {
@@ -43,29 +50,29 @@ export default function WishlistPage() {
     if (hydrated) {
       fetchWishlist();
     }
-  }, [items, hydrated]);
+  }, [items, hydrated, removeItem]);
 
-  if (!hydrated) {
+  if (!hydrated || isLoading) {
     return (
       <div className="container mx-auto px-4 py-32 flex justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-gray-300" />
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
       </div>
     );
   }
 
-  if (items.length === 0) {
+  if (products.length === 0) {
     return (
       <div className="container mx-auto px-4 py-32 flex flex-col items-center text-center">
-        <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mb-6">
+        <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center text-muted-foreground mb-6">
           <Heart className="w-12 h-12" />
         </div>
         <h1 className="text-3xl font-display font-bold mb-4">Your wishlist is empty</h1>
-        <p className="text-gray-500 mb-8 max-w-md">
+        <p className="text-muted-foreground mb-8 max-w-md">
           Save items you love to your wishlist and review them later.
         </p>
         <Link
           href="/collections"
-          className="px-8 py-4 bg-black text-white font-medium rounded-md hover:bg-gray-900 transition-colors"
+          className="px-8 py-4 bg-brand text-brand-foreground font-medium rounded-md hover:opacity-90 hover:bg-brand transition-colors"
         >
           Start Shopping
         </Link>
@@ -80,22 +87,16 @@ export default function WishlistPage() {
           <Heart className="w-8 h-8 text-red-500 fill-red-500" />
           Your Wishlist
         </h1>
-        <p className="text-gray-600">
-          {items.length} {items.length === 1 ? 'item' : 'items'} saved
+        <p className="text-muted-foreground">
+          {products.length} {products.length === 1 ? 'item' : 'items'} saved
         </p>
       </div>
 
-      {isLoading ? (
-        <div className="flex justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-gray-300" />
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6 md:gap-y-12 lg:gap-x-8">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6 md:gap-y-12 lg:gap-x-8">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -39,7 +39,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-[60]"
+            className="fixed inset-0 bg-brand/50 z-[60]"
             onClick={onClose}
           />
           <motion.div
@@ -47,11 +47,11 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-y-0 left-0 w-[85vw] max-w-sm bg-white z-[70] flex flex-col shadow-2xl"
+            className="fixed inset-y-0 left-0 w-[85vw] max-w-sm bg-background z-[70] flex flex-col shadow-2xl"
           >
             <div className="flex items-center justify-between p-4 border-b">
               <span className="font-display font-bold text-xl tracking-tighter">Menu</span>
-              <button onClick={onClose} className="p-2 -mr-2 text-gray-900">
+              <button onClick={onClose} className="p-2 -mr-2 text-foreground">
                 <X className="w-5 h-5" />
                 <span className="sr-only">Close menu</span>
               </button>
@@ -64,10 +64,10 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     key={item.name}
                     href={item.href}
                     onClick={onClose}
-                    className="flex items-center justify-between p-4 text-lg font-medium hover:bg-gray-50 border-b border-gray-100 text-gray-900"
+                    className="flex items-center justify-between p-4 text-lg font-medium hover:bg-muted border-b border-border text-foreground"
                   >
                     {item.name}
-                    <ChevronRight className="w-5 h-5 text-gray-400" />
+                    <ChevronRight className="w-5 h-5 text-muted-foreground" />
                   </Link>
                 ))}
               </nav>

@@ -3,58 +3,58 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-gray-50 border-t pt-16 pb-8">
+    <footer className="bg-muted border-t pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           
           <div className="lg:col-span-2">
-            <Link href="/" className="font-display font-bold text-2xl tracking-tighter mb-6 block text-gray-900">
+            <Link href="/" className="font-display font-bold text-2xl tracking-tighter mb-6 block text-foreground">
               FASHION SF
             </Link>
-            <p className="text-gray-500 text-sm mb-6 max-w-sm">
+            <p className="text-muted-foreground text-sm mb-6 max-w-sm">
               Discover the latest trends in fashion. We provide high-quality apparel for the modern lifestyle.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-black transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="text-gray-400 hover:text-black transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="text-gray-400 hover:text-black transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="text-gray-400 hover:text-black transition-colors"><Youtube className="w-5 h-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Instagram className="w-5 h-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Youtube className="w-5 h-5" /></a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-gray-900">Shop</h4>
-            <ul className="space-y-3 text-sm text-gray-500">
-              <li><Link href="/collections/new-arrivals" className="hover:text-black transition-colors">New Arrivals</Link></li>
-              <li><Link href="/collections/men" className="hover:text-black transition-colors">Men</Link></li>
-              <li><Link href="/collections/women" className="hover:text-black transition-colors">Women</Link></li>
-              <li><Link href="/collections/accessories" className="hover:text-black transition-colors">Accessories</Link></li>
+            <h4 className="font-bold mb-4 text-foreground">Shop</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/collections/new-arrivals" className="hover:text-foreground transition-colors">New Arrivals</Link></li>
+              <li><Link href="/collections/men" className="hover:text-foreground transition-colors">Men</Link></li>
+              <li><Link href="/collections/women" className="hover:text-foreground transition-colors">Women</Link></li>
+              <li><Link href="/collections/accessories" className="hover:text-foreground transition-colors">Accessories</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-gray-900">Customer Service</h4>
-            <ul className="space-y-3 text-sm text-gray-500">
-              <li><Link href="/contact" className="hover:text-black transition-colors">Contact Us</Link></li>
-              <li><Link href="/faq" className="hover:text-black transition-colors">FAQs</Link></li>
-              <li><Link href="/shipping" className="hover:text-black transition-colors">Shipping & Returns</Link></li>
-              <li><Link href="/track-order" className="hover:text-black transition-colors">Track Order</Link></li>
+            <h4 className="font-bold mb-4 text-foreground">Customer Service</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/contact" className="hover:text-foreground transition-colors">Contact Us</Link></li>
+              <li><Link href="/faq" className="hover:text-foreground transition-colors">FAQs</Link></li>
+              <li><Link href="/shipping" className="hover:text-foreground transition-colors">Shipping & Returns</Link></li>
+              <li><Link href="/track-order" className="hover:text-foreground transition-colors">Track Order</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-gray-900">Newsletter</h4>
-            <p className="text-sm text-gray-500 mb-4">Subscribe to receive updates, access to exclusive deals, and more.</p>
+            <h4 className="font-bold mb-4 text-foreground">Newsletter</h4>
+            <p className="text-sm text-muted-foreground mb-4">Subscribe to receive updates, access to exclusive deals, and more.</p>
             <form className="flex gap-2">
               <input 
                 type="email" 
                 placeholder="Enter your email address" 
-                className="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black bg-white"
+                className="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black bg-background"
                 required
               />
               <button 
                 type="submit"
-                className="bg-black text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-black/90 transition-colors"
+                className="bg-brand text-brand-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-brand/90 transition-colors"
               >
                 Subscribe
               </button>
@@ -63,11 +63,11 @@ export function Footer() {
           
         </div>
 
-        <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+        <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Fashion SF. All rights reserved.</p>
           <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-black transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-black transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

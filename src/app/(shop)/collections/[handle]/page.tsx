@@ -44,7 +44,7 @@ export default async function CollectionPage({
     notFound();
   }
 
-  const sortKey = (resolvedSearchParams.sortKey as string) || "CREATED_AT";
+  const sortKey = (resolvedSearchParams.sortKey as string) || "COLLECTION_DEFAULT";
   const reverse = resolvedSearchParams.reverse === "true";
   const after = (resolvedSearchParams.after as string) || undefined;
   
@@ -86,12 +86,12 @@ export default async function CollectionPage({
       <div className="flex flex-col items-center text-center mb-12">
         <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{collection.title}</h1>
         {collection.description && (
-          <p className="text-gray-600 max-w-2xl">{collection.description}</p>
+          <p className="text-muted-foreground max-w-2xl">{collection.description}</p>
         )}
       </div>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-muted-foreground">
           Showing {mappedProducts.length} products
         </div>
         <div className="flex items-center gap-4">
