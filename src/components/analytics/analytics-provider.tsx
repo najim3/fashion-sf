@@ -2,10 +2,10 @@
 
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { trackPageView } from "@/lib/analytics";
 
-export function AnalyticsProvider() {
+function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -20,12 +20,19 @@ export function AnalyticsProvider() {
     }
   }, [pathname, searchParams]);
 
+  return null;
+}
+
+export function AnalyticsProvider() {
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID;
   const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
   const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
   return (
     <>
+      <Suspense fallback={null}>
+        <AnalyticsTracker />
+      </Suspense>
       {/* Google Analytics 4 */}
       {GA_MEASUREMENT_ID && (
         <>
